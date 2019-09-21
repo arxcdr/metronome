@@ -6,6 +6,9 @@ app.get("/", function(req, res){
 	res.render("index.ejs");
 });
 
+app.use(express.static('scripts'));
+app.use(express.static('sound'));
+
 app.listen(port, function(){
 	console.log("Server has started!");
 });

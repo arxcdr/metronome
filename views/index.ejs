@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script type="application/javascript" src="playsound.js"></script>
+
     <title>metronome</title>
   </head>
   <body>
@@ -48,10 +50,10 @@
 	<div class="container" style="padding-top: 75px;">
 		<div class="row justify-content-md-center">
 			<div class="col-md-auto">
-		      <button type="button" class="btn btn-dark btn-lg font-weight-bold">START</button>
+		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Play('1a')">START</button>
 		    </div>
 		    <div class="col-md-auto">
-		      <button type="button" class="btn btn-dark btn-lg font-weight-bold">STOP</button>
+		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Stop()">STOP</button>
 		    </div>
 		</div>
 	</div>
@@ -70,7 +72,7 @@
 	      Tempo
 	    </div>
 	    <div class="col">
-	      60
+	      <input type="number" class="form-control" id="tempoNum" value=60>
 	    </div>
 	  </div>
 	</div>
