@@ -1,0 +1,20 @@
+.col.mainBeat{
+	column-width: 200px;
+}
+
+.col{
+	column-width: auto;
+}
+
+#m1, #m2, #m3, #m4{
+	background-color: white;
+}
+/*#m2{
+	background-color: white;
+}
+#m3{
+	background-color: white;
+}
+#m4{
+	background-color: white;
+}*/
