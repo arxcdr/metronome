@@ -2,22 +2,38 @@ var freq;
 var currentLoop;
 var currentTempo;
 var currentSound; // The chosen sound for metronome ticks
-var eqIndex = [1,1]; // The square(s) to paint first when the metronome starts
+var mIndex = 1; // The square(s) to paint first when the metronome starts
+var sIndex = 1;
+var subdivisions;
 
 function Play(sound) {
 	if(currentLoop != 0) {Stop();}
-    currentLoop = setInterval(PlaySound, GetFreq());
+	GetSubdivisions();
+    currentLoop = setInterval(Tick, GetFreq());
 }
 
 function PlaySound(){
 	var snd = new Audio(GetSound());
-	snd.play();
-	PaintIndex();
+	snd.play();	
 }
 
 function Stop(){
 	clearInterval(currentLoop);
-	ResetEQIndex();
+	ResetIndexes();
+}
+
+function Tick(){
+	PlaySound();
+	if(subdivisions == 0){
+		if(mIndex > 4){
+		ResetIndexes();
+			}
+		PaintIndex("m"+mIndex);
+		IncreaseMIndex();
+	}
+	else{
+
+	}
 }
 
 function GetTempo(){
@@ -31,20 +47,33 @@ function GetFreq(){
 }
 
 function GetSound(){
-	currentSound = ("1a" + ".wav");
+	currentSound = ("1b" + ".wav");
 	return currentSound;
 }
 
-function GetEQIndex(){
-	return eqIndex;
+function GetSubdivisions(){
+	subdivisions = document.getElementById("subdivisions").value;
+	return subdivisions;
 }
 
-function ResetEQIndex(){
-	eqIndex = [1,1];
+function IncreaseMIndex(){
+	mIndex++;
 }
 
-function PaintIndex(){
-	var bgColor = document.getElementById("m1");
-	console.log(bgColor);
-	//bgColor = #cc0000;
+// Set each index back to starting point and unpaint everything
+function ResetIndexes(){
+	mIndex = 1;
+	sIndex = 1;
+	var i;
+	for(i = 1; i<5;i++){
+		UnpaintIndex("m"+i);		
+	}
+}
+
+function PaintIndex(index){
+	document.getElementById(index).style.backgroundColor="lightblue";
+}
+
+function UnpaintIndex(index){
+	document.getElementById(index).style.backgroundColor="white";
 }
