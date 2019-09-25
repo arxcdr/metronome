@@ -2,18 +2,22 @@ var freq;
 var currentLoop;
 var currentTempo;
 var currentSound; // The chosen sound for metronome ticks
-var mIndex = 1; // The square(s) to paint first when the metronome starts
-var sIndex = 1;
+var beatIndex = 1;
+var aIndex = 1;
+var mIndex = 1; // Position for the main beat
+var sIndex = 1; // Position for the subdivisions
+var subEnabled = false;
 var subdivisions;
+var resetFlag = false;
 
-function Play(sound) {
+function Play() {
 	if(currentLoop != 0) {Stop();}
 	GetSubdivisions();
     currentLoop = setInterval(Tick, GetFreq());
 }
 
-function PlaySound(){
-	var snd = new Audio(GetSound());
+function PlaySound(sound){
+	var snd = new Audio(sound);
 	snd.play();	
 }
 
@@ -23,17 +27,36 @@ function Stop(){
 }
 
 function Tick(){
-	PlaySound();
-	if(subdivisions == 0){
-		if(mIndex > 4){
-		ResetIndexes();
+	if(resetFlag){ResetIndexes(); resetFlag = false;}
+	console.log("Index: "+beatIndex);
+	switch (subdivisions){
+		case 1:
+			PlaySound("1b.wav");
+			if(mIndex > 4){	ResetIndexes();	}
+			PaintIndex("m"+mIndex);
+			PaintIndex("s"+sIndex);
+			mIndex++;
+			sIndex++;
+			beatIndex++;
+			break;
+		case 2:
+			if(beatIndex % 2 != 0){
+				PlaySound("1b.wav");
+				PaintIndex("m"+mIndex);
+				PaintIndex("s"+sIndex);
+				mIndex++;
+				sIndex++;
+				beatIndex++;
+			}else{
+				PlaySound("1a.wav");
+				console.log("aIndex: "+aIndex);
+				PaintIndex("a"+aIndex);
+				aIndex++;
+				beatIndex++;
+				if(beatIndex > 8){resetFlag = true;}
 			}
-		PaintIndex("m"+mIndex);
-		IncreaseMIndex();
-	}
-	else{
-
-	}
+			break;
+	}	
 }
 
 function GetTempo(){
@@ -42,7 +65,12 @@ function GetTempo(){
 }
 
 function GetFreq(){
-	freq = (60000/GetTempo());
+	if(subEnabled == false){
+		freq = (60000/(GetTempo()));			
+	}
+	else{
+		freq = ((60000/GetTempo())/subdivisions);
+	}
 	return freq;
 }
 
@@ -52,21 +80,27 @@ function GetSound(){
 }
 
 function GetSubdivisions(){
-	subdivisions = document.getElementById("subdivisions").value;
+	subdivisions = Number(document.getElementById("subdivisions").value);
+	console.log("Subs: " + subdivisions);
+	if(subdivisions > 1){subEnabled = true;}
+	else{subEnabled = false;}
 	return subdivisions;
-}
-
-function IncreaseMIndex(){
-	mIndex++;
 }
 
 // Set each index back to starting point and unpaint everything
 function ResetIndexes(){
+	beatIndex = 1;
+	aIndex = 1;
 	mIndex = 1;
 	sIndex = 1;
-	var i;
-	for(i = 1; i<5;i++){
-		UnpaintIndex("m"+i);		
+	for(var i = 1; i<5;i++){
+		UnpaintIndex("m"+i);
+		UnpaintIndex("s"+i);		
+	}
+	if(subEnabled){
+		for(var j = 0; j<(4*(subdivisions/2)); j++){
+			UnpaintIndex("a"+(j+1));
+		}
 	}
 }
 

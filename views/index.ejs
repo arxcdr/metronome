@@ -17,61 +17,61 @@
     <div class="jumbotron" style="background-color:#000000">
 	  <h1 class="display-4"><font color=#ffffff>metronome</font></h1>
 	</div>
-	<div class="container">
+	<div style="width: 60%">
 	  <div class="row">
-	    <div class="col mainBeat" id="m1" style="background-color:white">
+	    <div class="col col-sm- mainBeat" id="m1" style="background-color:white">
 	    	<span class="border">
 	      m1
 	  		</span>
 	    </div>
-	    <div class="col">
+	    <div class="col col-md-">
 
 	    </div>
-	    <div class="col mainBeat" id="m2" style="background-color:white">
+	    <div class="col col-sm- mainBeat" id="m2" style="background-color:white">
 	      m2
 	    </div>
-	    <div class="col">
+	    <div class="col col-md-">
 
 	    </div>
-	    <div class="col mainBeat" id="m3" style="background-color:white">
+	    <div class="col col-sm- mainBeat" id="m3" style="background-color:white">
 	      m3
 	    </div>
-	    <div class="col">
+	    <div class="col col-md-">
 
 	    </div>
-	    <div class="col mainBeat" id="m4" style="background-color:white">
+	    <div class="col col-sm- mainBeat" id="m4" style="background-color:white">
 	      m4
 	    </div>
-	    <div class="col">
+	    <div class="col col-md-">
 
 	    </div>
 	  </div>
 	  <div class="row">
-	    <div class="col" id="s1">
+	    <div class="col col-sm-" id="s1">
 	    <span class="border">
 	      s1
 	  	</span>
 	    </div>
-	    <div class="col" id="s2">
+	    <div class="col col-md-" id="a1">
+	      a1
+	    </div>
+	    <div class="col col-sm-" id="s2">
 	      s2
 	    </div>
-	    <div class="col" id="s3">
+	    <div class="col col-md-" id="a2">
+	      a2
+	    </div>
+	    <div class="col col-sm-" id="s3">
 	      s3
 	    </div>
-	    <div class="col" id="s4">
+	    <div class="col col-md-" id="a3">
+	      a3
+	    </div>
+	    <div class="col col-sm-" id="s4">
 	      s4
 	    </div>
-	    <div class="col" id="s5">
-	      s5
-	    </div>
-	    <div class="col" id="s6">
-	      s6
-	    </div>
-	    <div class="col" id="s7">
-	      s7
-	    </div>
-	    <div class="col" id="s8">
-	      s8
+	    <div class="col col-md-" id="a4">
+	      a4
 	    </div>
 	  </div>
 	</div>
@@ -79,7 +79,7 @@
 	<div class="container" style="padding-top: 75px;">
 		<div class="row justify-content-md-center">
 			<div class="col-md-auto">
-		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Play('1a')">START</button>
+		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Play()">START</button>
 		    </div>
 		    <div class="col-md-auto">
 		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Stop()">STOP</button>
@@ -94,10 +94,9 @@
 	    </div>
 		    <div class="col">
 				<select id="subdivisions">
-				  <option value="0">0</option>
-				  <option value="2">2</option>
-				  <option value="4">4</option>
-				  <option value="8">8</option>
+				  <option value=1>1</option>
+				  <option value=2>2</option>
+				  <option value=4>4</option>
 				</select>
 			</div>
 	  </div>
