@@ -1,20 +1,20 @@
-.col.mainBeat{
-	column-width: 200px;
+.col.col-sm-.mainBeat{
+	-webkit-flex-basis: 5%; /* Safari 6.1+ */
+	flex-basis: 5%;
+	flex-grow: 0;
+	padding-left: 0px;
+	padding-right: 0px;
+	}
+
+.col.col-md-.subdiv{
+	-webkit-flex-basis: 15%; /* Safari 6.1+ */
+	flex-basis: 15%;
+	padding-left: 0px;
+	padding-right: 0px;
+	column-count: 1;
 }
 
-.col{
-	column-width: auto;
+.col.sub{
+	padding-left: 0px;
+	padding-right: 0px;
 }
-
-/*#m1, #m2, #m3, #m4{
-	background-color: white;
-}*/
-/*#m2{
-	background-color: white;
-}
-#m3{
-	background-color: white;
-}
-#m4{
-	background-color: white;
-}*/
