@@ -36,8 +36,8 @@ function Tick(){
 	switch (subdivisions){
 		case 1:
 			PlaySound("1b.wav");
-			PaintIndex("m"+mIndex);
-			PaintIndex("s"+sIndex);
+			PaintIndex("m"+mIndex, "red");
+			PaintIndex("s"+sIndex, "red");
 			mIndex++;
 			sIndex++;
 			beatIndex++;
@@ -47,15 +47,15 @@ function Tick(){
 			mainBeats = GetMainBeats();
 			if(mainBeats.includes(beatIndex)){
 				PlaySound("1b.wav");
-				PaintIndex("m"+mIndex);
-				PaintIndex("s"+sIndex);
+				PaintIndex("m"+mIndex, "red");
+				PaintIndex("s"+sIndex, "red");
 				mIndex++;
 				sIndex++;
 				beatIndex++;
 			}else{
 				PlaySound("1a.wav");
 				console.log("sdIndex: "+aIndex);
-				PaintIndex("sdiv"+aIndex);
+				PaintIndex("sdiv"+aIndex, "blue");
 				aIndex++;
 				beatIndex++;
 				if(beatIndex > (4*subdivisions)){resetFlag = true;}
@@ -130,12 +130,16 @@ function ResetIndexes(){
 	}
 }
 
-function PaintIndex(index){
-	document.getElementById(index).style.backgroundColor="lightblue";
+function PaintIndex(index, color){
+	//document.getElementById(index).style.backgroundColor="lightblue";	
+	var img = document.createElement("img");
+	img.src = color+"notes.svg";
+	document.getElementById(index).appendChild(img);
 }
 
 function UnpaintIndex(index){
-	document.getElementById(index).style.backgroundColor="white";
+	//document.getElementById(index).style.backgroundColor="white";
+	document.getElementById(index).removeChild();
 }
 
 // Add/Remove desired number of div elements to the UI for subdivisions
@@ -147,9 +151,9 @@ function CreateDivs(){
 			sdiv++;
 			const div = document.createElement('div');
 			div.className = "col sub";
-			div.style="background-color:white";
+			div.style="background-color:black";
 			div.id = "sdiv"+sdiv;
-			div.innerHTML=div.id;
+			div.innerHTML="";
 			document.getElementById("a"+i).appendChild(div);
 		}
 	}
