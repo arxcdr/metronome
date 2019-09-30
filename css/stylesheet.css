@@ -18,6 +18,7 @@ body {
 	flex-basis: 5%;
 	flex-grow: 0;
 	padding: 1px;
+	border: medium solid black;
 	}
 
 .col.col-md-.subdiv{
@@ -25,11 +26,13 @@ body {
 	flex-basis: 15%;
 	padding: 1px;
 	column-count: 1;
+	/*border: medium dotted yellow;*/
 }
 
 .col.sub{
 	padding: 1px;
 	min-width: 5px;
+	/*border: medium dotted yellow;*/
 }
 
 #eqdiv{

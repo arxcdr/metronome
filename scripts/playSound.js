@@ -131,15 +131,29 @@ function ResetIndexes(){
 }
 
 function PaintIndex(index, color){
+	//To paint a square blue
 	//document.getElementById(index).style.backgroundColor="lightblue";	
-	var img = document.createElement("img");
-	img.src = color+"notes.svg";
-	document.getElementById(index).appendChild(img);
+
+	//To insert an image in a square
+	// var img = document.createElement("img");
+	// img.src = color+"notes.svg";
+	// document.getElementById(index).appendChild(img);
+
+	//Changing square borders & background
+	document.getElementById(index).style.backgroundColor="yellow";
+	document.getElementById(index).style.border="medium solid yellow";
 }
 
 function UnpaintIndex(index){
-	//document.getElementById(index).style.backgroundColor="white";
-	document.getElementById(index).removeChild();
+	//To paint back to default bg color
+	//document.getElementById(index).style.backgroundColor="black";
+
+	//To delete inserted images (WIP-NOT FUNCTIONAL)
+	//document.getElementById(index).removeChild();
+
+	//To revert changes to square borders & background
+	document.getElementById(index).style.backgroundColor="black";
+	document.getElementById(index).style.border="medium solid black";
 }
 
 // Add/Remove desired number of div elements to the UI for subdivisions
@@ -151,7 +165,7 @@ function CreateDivs(){
 			sdiv++;
 			const div = document.createElement('div');
 			div.className = "col sub";
-			div.style="background-color:black";
+			div.style="background-color:black; border:medium solid black;";
 			div.id = "sdiv"+sdiv;
 			div.innerHTML="";
 			document.getElementById("a"+i).appendChild(div);
