@@ -9,6 +9,7 @@ app.get("/", function(req, res){
 app.use(express.static('css'));
 app.use(express.static('scripts'));
 app.use(express.static('art'));
+app.use(express.static('fonts'));
 app.use(express.static('sound'));
 
 app.listen(port, function(){

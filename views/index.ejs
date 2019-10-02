@@ -42,35 +42,29 @@
 	    </div>
 	  </div>
 	  <div class="row">
-	    <div class="col col-sm- mainBeat" id="s1"> </div>
-	    <div class="col col-md- subdiv" id="a1" style="column-count:1"></div>
-	    <div class="col col-sm- mainBeat" id="s2"> </div>
-	    <div class="col col-md- subdiv" id="a2" style="column-count:1"></div>
-	    <div class="col col-sm- mainBeat" id="s3"> </div>
-	    <div class="col col-md- subdiv" id="a3" style="column-count:1"></div>
-	    <div class="col col-sm- mainBeat" id="s4"> </div>
-	    <div class="col col-md- subdiv" id="a4" style="column-count:1"></div>
+	    <div class="col col-sm- center mainBeat" id="s1"> </div>
+	    <div class="col col-md- center subdiv" id="a1" style="column-count:1"></div>
+	    <div class="col col-sm- center mainBeat" id="s2"> </div>
+	    <div class="col col-md- center subdiv" id="a2" style="column-count:1"></div>
+	    <div class="col col-sm- center mainBeat" id="s3"> </div>
+	    <div class="col col-md- center subdiv" id="a3" style="column-count:1"></div>
+	    <div class="col col-sm- center mainBeat" id="s4"> </div>
+	    <div class="col col-md- center subdiv" id="a4" style="column-count:1"></div>
 	  </div>
 	</div>
 	<p>
-	<div class="container" style="padding-top: 75px;">
-		<div class="row justify-content-md-center">
-			<div class="col-md-auto">
-		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Play()">START</button>
-		    </div>
-		    <div class="col-md-auto">
-		      <button type="button" class="btn btn-dark btn-lg font-weight-bold" onclick="Stop()">STOP</button>
-		    </div>
+	<div class="container center" style="padding-top: 75px; width:280px">
+		<div class="row center" style="width:100%">
+	      <div class="col"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Play()">START</button></div>
+	      <div class="col"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Stop()">STOP</button></div>
 		</div>
 	</div>
 	<p>
-	<div class="container" style="padding-top: 75px; width:20%;">
-	  <div class="row justify-content-md-center">
-	    <div class="col">
-	      Subdivisions
-	    </div>
-	    <div class="col">
-			<select id="subdivisions" style="height: 30px; width:75px; padding: 1px;">
+	<div class="container center" style="padding-top: 75px; width:280px;">
+	  <div class="row center" style="width:100%;">
+	  	<div class="col">Subdivisions</div>
+		<div class="col">
+			<select id="subdivisions" style="height: 30px; width:75px;">
 			  <option value=1>No</option>
 			  <option value=2>2</option>
 			  <option value=3>3</option>
@@ -79,13 +73,9 @@
 		</div>
 	  </div>
 	  <p>
-	  <div class="row justify-content-md-center">
-	    <div class="col">
-	      Tempo
-	    </div>
-	    <div class="col">
-	      <input type="number" class="form-control" id="tempoNum" value=60 style="height: 30px; width:75px; padding:1px;">
-	    </div>
+	  <div class="row center" style="width:100%;">
+  		<div class="col">Tempo</div>
+    	<div class="col"><input type="number" class="form-control" id="tempoNum" value=60 style="height: 30px; width:75px;"></div>
 	  </div>
 	</div>
 

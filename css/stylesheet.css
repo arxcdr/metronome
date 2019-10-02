@@ -2,6 +2,7 @@ html {
    margin: 0px;
    height: 100%;
    width: 100%;
+   min-width: 250px;
 }
 
 body {
@@ -11,6 +12,10 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: white;
+}
+
+.jumbotron{
+	font-family: riesling;
 }
 
 .col.col-sm-.mainBeat{
@@ -46,4 +51,10 @@ body {
 	padding: 25px;
 	max-width: 750px;
 	background-color: black;
+}
+
+@font-face
+{
+font-family: "riesling";
+src: url('riesling.ttf');
 }
