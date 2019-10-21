@@ -3,77 +3,76 @@ var currentLoop;
 var currentTempo; // Tempo entered by user
 var currentSound; // The chosen sound for metronome ticks
 var beatIndex = 1; // Keeps track of beats played
-var aIndex = 1; // Position for creating subdivisions
 var mIndex = 1; // Position for the main beat
-var sIndex = 1; // Position for main beat in the subdivision row
+var sIndex = 1; // Position for subdivisions
 var mainBeats; // Beats per measure (4 by default)
-var sdiv; // Number of div elements created for subdivisions in the UI
+var sdiv; // Number of div elements to create in the UI
 var subEnabled = false;
-var subdivisions; // Number of subdivisions requested by user: 1 for none,2 for half notes, 3 for triplets, 4 for quarter notes
+var subdivisions; // Number of subdivisions requested by user
 var resetFlag = false; // bool to flag the end of the measure has been reached
+var running = false; // Keep track of metronome state
 
+// Start the metronome
 function Play() {
-	if(currentLoop != 0) {Stop();}
+	if(running) {Stop();}
 	GetSubdivisions();
-	RemoveDivs();
-	CreateDivs();
+	DrawTable();
     currentLoop = setInterval(Tick, GetFreq());
+    running = true;
 }
 
+// Play metronome sound (TODO: based on user preference)
 function PlaySound(sound){
 	var snd = new Audio(sound);
 	snd.play();	
 }
 
+// Turn off the metronome
 function Stop(){
 	clearInterval(currentLoop);
 	ResetIndexes();
+	running = false;
 }
 
 function Tick(){
 	if(resetFlag){ResetIndexes(); resetFlag = false;}
-	console.log("Index: "+beatIndex);
-	switch (subdivisions){
-		case 1:
-			PlaySound("1b.wav");
-			PaintIndex("m"+mIndex, "red");
-			PaintIndex("s"+sIndex, "red");
-			mIndex++;
-			sIndex++;
-			beatIndex++;
-			if(mIndex > (4*subdivisions)){resetFlag = true;}
-			break;
-		default:
-			mainBeats = GetMainBeats();
+	if(subEnabled){
+		mainBeats = GetMainBeats();
 			if(mainBeats.includes(beatIndex)){
 				PlaySound("1b.wav");
-				PaintIndex("m"+mIndex, "red");
-				PaintIndex("s"+sIndex, "red");
-				mIndex++;
-				sIndex++;
+				BlinkAtIndex("m"+mIndex, "red");
+				sIndex = 1;
 				beatIndex++;
 			}else{
 				PlaySound("1a.wav");
-				console.log("sdIndex: "+aIndex);
-				PaintIndex("sdiv"+aIndex, "blue");
-				aIndex++;
+				BlinkAtIndex("m"+(mIndex+1), "red");
 				beatIndex++;
-				if(beatIndex > (4*subdivisions)){resetFlag = true;}
+				sIndex++;
+				if(sIndex > subdivisions){
+					mIndex+=2;
+				}
+				if(beatIndex > (mainBeats.length+(mainBeats.length*subdivisions))){resetFlag = true;}
 			}
-			break;
 	}	
+	else{
+		PlaySound("1b.wav");
+		BlinkAtIndex("m"+beatIndex, "red");
+		beatIndex++;
+		if(beatIndex > 4){resetFlag = true;}
+	}
 }
 
 function GetMainBeats(){
 	var beats = [1];
 	var nextVal = 1;
 	for(var i = 0; i<3; i++){
-		nextVal += subdivisions;
+		nextVal += (1+subdivisions);
 		beats.push(nextVal);
 	}
 	return beats;
 }
 
+// Get the tempo entered by user
 function GetTempo(){
 	 currentTempo = document.getElementById("tempoNum").value;
 	 return currentTempo;
@@ -89,92 +88,59 @@ function GetFreq(){
 	return freq;
 }
 
+// Will allow user to select metronome sounds in a list
 function GetSound(){
 	currentSound = ("1b" + ".wav");
 	return currentSound;
 }
 
+// Get number of subdivisions chosen by user
 function GetSubdivisions(){
 	subdivisions = Number(document.getElementById("subdivisions").value);
-	console.log("Subs: " + subdivisions);
-	if(subdivisions > 1){subEnabled = true;}
+	if(subdivisions > 0){subEnabled = true;}
 	else{subEnabled = false;}
 	return subdivisions;
 }
 
-// Set each index back to starting point and unpaint everything
+// Set each index back to starting position
 function ResetIndexes(){
 	beatIndex = 1;
-	aIndex = 1;
 	mIndex = 1;
-	sIndex = 1;
-	for(var i = 1; i<5;i++){
-		UnpaintIndex("m"+i);
-		UnpaintIndex("s"+i);
-	}
-	if(subEnabled){
-		for(var h = 1; h<5; h++){
-			UnpaintIndex("a"+h);
-		}
-		switch(subdivisions){
-			case 1:
-				break;
-
-			default:
-				for(var j = 0; j<(4*(subdivisions-1)); j++){
-					console.log("sdiv"+(j+1));
-					UnpaintIndex("sdiv"+(j+1));
-				}
-				break;
-		}
-	}
 }
 
-function PaintIndex(index, color){
-	//To paint a square blue
-	//document.getElementById(index).style.backgroundColor="lightblue";	
-
-	//To insert an image in a square
-	// var img = document.createElement("img");
-	// img.src = color+"notes.svg";
-	// document.getElementById(index).appendChild(img);
-
-	//Changing square borders & background
-	document.getElementById(index).style.backgroundColor="yellow";
-	document.getElementById(index).style.border="medium solid yellow";
+// Blink at current index to show position
+function BlinkAtIndex(index, color){
+	document.getElementById(index).style.backgroundColor="red";
+	setTimeout(function(){document.getElementById(index).style.backgroundColor="#FFD700";}, 150);
 }
 
-function UnpaintIndex(index){
-	//To paint back to default bg color
-	//document.getElementById(index).style.backgroundColor="black";
-
-	//To delete inserted images (WIP-NOT FUNCTIONAL)
-	//document.getElementById(index).removeChild();
-
-	//To revert changes to square borders & background
-	document.getElementById(index).style.backgroundColor="black";
-	document.getElementById(index).style.border="medium solid black";
-}
-
-// Add/Remove desired number of div elements to the UI for subdivisions
-function CreateDivs(){
-	sdiv = 0;
-	for(var i = 1; i<5;i++){
-		document.getElementById("a"+i).style.columnCount=(subdivisions-1);
-		for(var j = 1; j<subdivisions;j++){
-			sdiv++;
+// Draw desired number of div elements to the UI
+function DrawTable(){
+	var wasRunning = running;
+	Stop();
+	document.getElementById("mdiv").innerHTML="";
+	if(GetSubdivisions() == 0){
+		sdiv = 4; // Hardcoded number of beats
+		for(var i = 1; i<(sdiv+1);i++){
 			const div = document.createElement('div');
-			div.className = "col sub";
-			div.style="background-color:black; border:medium solid black;";
-			div.id = "sdiv"+sdiv;
-			div.innerHTML="";
-			document.getElementById("a"+i).appendChild(div);
+			div.className = "recbar";
+			div.id = "m"+i;
+			document.getElementById("mdiv").appendChild(div);
 		}
 	}
-}
-
-function RemoveDivs(){
-	for(var i = 1; i<5;i++){
-		document.getElementById("a"+i).innerHTML="";
+	else{
+		sdiv = 8; // Hardcoded number of beats
+		for(var i = 1; i<(sdiv+1);i++){
+			const div = document.createElement('div');
+			if(i%2 != 0){
+				div.className = "recbar";
+			}
+			else{
+				div.className = "circle";
+			}
+			div.id = "m"+i;
+			document.getElementById("mdiv").appendChild(div);
+		}
 	}
+	if(wasRunning){Play()};
 }

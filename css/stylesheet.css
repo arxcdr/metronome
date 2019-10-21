@@ -18,26 +18,27 @@ body {
 	font-family: riesling;
 }
 
-.col.col-sm-.mainBeat{
-	-webkit-flex-basis: 5%; /* Safari 6.1+ */
-	flex-basis: 5%;
-	flex-grow: 0;
-	padding: 1px;
-	border: medium solid black;
-	}
-
-.col.col-md-.subdiv{
-	-webkit-flex-basis: 15%; /* Safari 6.1+ */
-	flex-basis: 15%;
-	padding: 1px;
-	column-count: 1;
-	/*border: medium dotted yellow;*/
+.recbar {
+  height: 50px;
+  width: 10px;
+  background-color: #FFD700;
+  margin: auto;
 }
 
-.col.sub{
-	padding: 1px;
-	min-width: 5px;
-	/*border: medium dotted yellow;*/
+.circle {
+  height: 10px;
+  width: 10px;
+  background-color: #FFD700;
+  border-radius: 50%;
+  align-self: center;
+  margin: auto;
+}
+
+.blinky {
+	-webkit-animation: BLINK 0.2s; /* Safari 4+ */
+	-moz-animation:    BLINK 0.2s; /* Fx 5+ */
+	-o-animation:      BLINK 0.2s; /* Opera 12+ */
+	animation:         BLINK 0.2s; /* IE 10+, Fx 29+ */
 }
 
 #eqdiv{
@@ -51,10 +52,18 @@ body {
 	padding: 25px;
 	max-width: 750px;
 	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @font-face
 {
 font-family: "riesling";
 src: url('riesling.ttf');
+}
+
+@-webkit-keyframes BLINK {
+0%, 100% {
+    background-color: #e50000;
 }

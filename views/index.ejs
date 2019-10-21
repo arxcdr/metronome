@@ -17,25 +17,15 @@
 	  <h1 class="display-4"><font color=#ffffff>metronome</font></h1>
 	</div>
 	<div id="eqdiv">
-	  <div class="row center" style="width:100%;">
-	    <div class="col col-sm- mainBeat" id="m1" style=""></div>
-	    <div class="col col-md- subdiv"> </div>
-	    <div class="col col-sm- mainBeat" id="m2" style=""></div>
-	    <div class="col col-md- subdiv"> </div>
-	    <div class="col col-sm- mainBeat" id="m3" style=""></div>
-	    <div class="col col-md- subdiv"> </div>
-	    <div class="col col-sm- mainBeat" id="m4" style=""></div>
-	    <div class="col col-md- subdiv"> </div>
-	  </div>
-	  <div class="row center" style="width:100%;">
-	    <div class="col col-sm- center mainBeat" id="s1"> </div>
-	    <div class="col col-md- center subdiv" id="a1" style="column-count:1"></div>
-	    <div class="col col-sm- center mainBeat" id="s2"> </div>
-	    <div class="col col-md- center subdiv" id="a2" style="column-count:1"></div>
-	    <div class="col col-sm- center mainBeat" id="s3"> </div>
-	    <div class="col col-md- center subdiv" id="a3" style="column-count:1"></div>
-	    <div class="col col-sm- center mainBeat" id="s4"> </div>
-	    <div class="col col-md- center subdiv" id="a4" style="column-count:1"></div>
+	  <div class="row center" id="mdiv" style="width:100%; min-height: 3em; justify-content: center;">
+	    <div class="recbar" id="m1" style=""></div>
+	    <!-- <div class="circle" id="s1"> </div> -->
+	    <div class="recbar" id="m2" style=""></div>
+	    <!-- <div class="circle" id="s2"> </div> -->
+	    <div class="recbar" id="m3" style=""></div>
+	    <!-- <div class="circle" id="s3"> </div> -->
+	    <div class="recbar" id="m4" style=""></div>
+	    <!-- <div class="circle" id="s4"> </div> -->
 	  </div>
 	</div>
 	<p>
@@ -50,13 +40,14 @@
 	  <div class="row center" style="width:100%;">
 	  	<div class="col">Subdivisions</div>
 		<div class="col">
-			<select id="subdivisions" style="height: 30px; width:75px;">
-			  <option value=1>No</option>
-			  <option value=2>2</option>
-			  <option value=3>3</option>
-			  <option value=4>4</option>
-			  <option value=8>8</option>
-			  <option value=16>16</option>
+			<select id="subdivisions" style="height: 30px; width:75px;" select onchange="DrawTable()">
+				<option value=0>No</option>
+				<option value=1>1</option>
+				<option value=2>2</option>
+				<option value=3>3</option>
+				<option value=4>4</option>
+				<option value=5>5</option>
+				<option value=6>6</option>
 			</select>
 		</div>
 	  </div>
