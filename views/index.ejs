@@ -8,54 +8,67 @@
     <!-- Bootstrap CSS -->   
     <link rel="stylesheet" href="bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://kit.fontawesome.com/1fdbacbfb7.js" crossorigin="anonymous"></script>
     <script type="application/javascript" src="playsound.js"></script>
 
     <title>metronome</title>
   </head>
   <body>
-    <div class="jumbotron" style="background-color:#000000">
-	  <h1 class="display-4"><font color=#ffffff>metronome</font></h1>
-	</div>
-	<div id="eqdiv">
-	  <div class="row center" id="mdiv" style="width:100%; min-height: 3em; justify-content: center;">
-	    <div class="recbar" id="m1" style=""></div>
-	    <!-- <div class="circle" id="s1"> </div> -->
-	    <div class="recbar" id="m2" style=""></div>
-	    <!-- <div class="circle" id="s2"> </div> -->
-	    <div class="recbar" id="m3" style=""></div>
-	    <!-- <div class="circle" id="s3"> </div> -->
-	    <div class="recbar" id="m4" style=""></div>
-	    <!-- <div class="circle" id="s4"> </div> -->
-	  </div>
-	</div>
-	<p>
-	<div class="container center" style="padding-top: 75px; width:280px">
-		<div class="row center" style="width:100%">
-	      <div class="col"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Play()">START</button></div>
-	      <div class="col"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Stop()">STOP</button></div>
+  	<div class="container-fluid center" style="width:360px; min-width: 360px; min-height: 451px; margin-top: 40px;">
+	    <div class="container-fluid center" id="hdr" style="background-color:#000000; width:320px; padding-top: 10px;">
+	    	<div class="row justify-content-center"><h1 class="display-4"><font color=#ffffff>metronome</font></h1></div>
 		</div>
-	</div>
-	<p>
-	<div class="container center" style="padding-top: 75px; width:280px;">
-	  <div class="row center" style="width:100%;">
-	  	<div class="col">Subdivisions</div>
-		<div class="col">
-			<select id="subdivisions" style="height: 30px; width:75px;" select onchange="DrawTable()">
-				<option value=0>No</option>
-				<option value=1>1</option>
-				<option value=2>2</option>
-				<option value=3>3</option>
-				<option value=4>4</option>
-				<option value=5>5</option>
-				<option value=6>6</option>
-			</select>
+		<div class="container-fluid center" style="padding-top: 30px; width:320px;">
+		  <div class="row align-items-center">
+		    <div class="col-2">
+		    	<div class="row align-items-center justify-content-center"><i class="fas fa-minus" onclick="RemoveBeat()"></i></div>
+		    </div>
+		    <div class="col-8" id="eqdiv">
+		      <div class="row align-items-center" id="mdiv">
+	      		<div class="recbar mx-auto my-2" id="m1" style=""></div>
+			    <div class="recbar mx-auto my-2" id="m2" style=""></div>
+			    <div class="recbar mx-auto my-2" id="m3" style=""></div>
+			    <div class="recbar mx-auto my-2" id="m4" style=""></div>
+		      </div>
+		    </div>
+		    <div class="col-2">
+		    	<div class="row align-items-center justify-content-center"><i class="fas fa-plus" onclick="AddBeat()"></i></div>
+		    </div>
+		  </div>
 		</div>
-	  </div>
-	  <p>
-	  <div class="row center" style="width:100%;">
-  		<div class="col">Tempo</div>
-    	<div class="col"><input type="number" class="form-control" id="tempoNum" value=60 style="height: 30px; width:75px;"></div>
-	  </div>
+		<p>
+		<div class="container-fluid center" style="padding-top: 30px; width:280px;">
+		  <div class="row center" style="width:100%;">
+		  	<div class="col-6" style="padding-left: 30px">Subdivisions</div>
+			<div class="col-6" style="padding-left: 45px">
+				<select id="subdivisions" style="height: 37px; width:75px; padding-left: 6px" select onchange="DrawTable()">
+					<option value=0>No</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+					<option value=4>4</option>
+					<option value=5>5</option>
+					<option value=6>6</option>
+				</select>
+			</div>
+		  </div>
+		  <p>
+		  <div class="row center" style="width:100%;">
+	  		<div class="col-6" style="padding-left: 30px;">Tempo</div>
+	    	<div class="col-6" style="padding-left: 45px"><input type="number" class="form-control" id="tempoNum" value=60 style="height: 37px; width:75px;"></div>
+		  </div>
+		  <p>
+			<div class="row center" style="width:100%;">
+	  		<div class="col-6" style="padding-left: 30px;">Stress 1<sup>st</sup></div>
+	    	<div class="col-6" style="padding-left: 45px"><input type="checkbox" id="hearFirst" style="transform: scale(1.2)"></div>
+		</div>
+		<p>
+		<div class="container-fluid" style="padding-top: 15px; padding-bottom: 15px; width:280px">
+			<div class="row align-items-center justify-content-center">
+		      <div class="col-6"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Play()">START</button></div>
+		      <div class="col-6"><button type="button" class="btn btn-dark btn-lg font-weight-bold" style="width:95px" onclick="Stop()">STOP</button></div>
+			</div>
+		</div>
 	</div>
 
     <!-- Optional JavaScript -->

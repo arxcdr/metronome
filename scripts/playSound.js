@@ -1,3 +1,4 @@
+var b = 4; // Number of dividers (4 by default)
 var freq;
 var currentLoop;
 var currentTempo; // Tempo entered by user
@@ -5,7 +6,7 @@ var currentSound; // The chosen sound for metronome ticks
 var beatIndex = 1; // Keeps track of beats played
 var mIndex = 1; // Position for the main beat
 var sIndex = 1; // Position for subdivisions
-var mainBeats; // Beats per measure (4 by default)
+var mainBeats; // Beats per measure
 var sdiv; // Number of div elements to create in the UI
 var subEnabled = false;
 var subdivisions; // Number of subdivisions requested by user
@@ -14,7 +15,7 @@ var running = false; // Keep track of metronome state
 
 // Start the metronome
 function Play() {
-	if(running) {Stop();}
+	if(running) { Stop(); }
 	GetSubdivisions();
 	DrawTable();
     currentLoop = setInterval(Tick, GetFreq());
@@ -58,14 +59,14 @@ function Tick(){
 		PlaySound("1b.wav");
 		BlinkAtIndex("m"+beatIndex, "red");
 		beatIndex++;
-		if(beatIndex > 4){resetFlag = true;}
+		if(beatIndex > b){resetFlag = true;}
 	}
 }
 
 function GetMainBeats(){
 	var beats = [1];
 	var nextVal = 1;
-	for(var i = 0; i<3; i++){
+	for(var i = 0; i<(b-1); i++){
 		nextVal += (1+subdivisions);
 		beats.push(nextVal);
 	}
@@ -79,11 +80,12 @@ function GetTempo(){
 }
 
 function GetFreq(){
+	console.log("subdivisions enabled: "+subEnabled);
 	if(subEnabled == false){
 		freq = (60000/(GetTempo()));
 	}
 	else{
-		freq = ((60000/GetTempo())/subdivisions);
+		freq = ((60000/GetTempo())/(subdivisions+1));
 	}
 	return freq;
 }
@@ -97,8 +99,12 @@ function GetSound(){
 // Get number of subdivisions chosen by user
 function GetSubdivisions(){
 	subdivisions = Number(document.getElementById("subdivisions").value);
-	if(subdivisions > 0){subEnabled = true;}
-	else{subEnabled = false;}
+	if(subdivisions > 0){
+		subEnabled = true;
+	}
+	else{
+		subEnabled = false;
+	}
 	return subdivisions;
 }
 
@@ -114,26 +120,26 @@ function BlinkAtIndex(index, color){
 	setTimeout(function(){document.getElementById(index).style.backgroundColor="#FFD700";}, 150);
 }
 
-// Draw desired number of div elements to the UI
+// Draw desired number of div elements
 function DrawTable(){
 	var wasRunning = running;
 	Stop();
 	document.getElementById("mdiv").innerHTML="";
 	if(GetSubdivisions() == 0){
-		sdiv = 4; // Hardcoded number of beats
+		sdiv = b;
 		for(var i = 1; i<(sdiv+1);i++){
 			const div = document.createElement('div');
-			div.className = "recbar";
+			div.className = "recbar mx-auto my-2";
 			div.id = "m"+i;
 			document.getElementById("mdiv").appendChild(div);
 		}
 	}
 	else{
-		sdiv = 8; // Hardcoded number of beats
+		sdiv = (b*2);
 		for(var i = 1; i<(sdiv+1);i++){
 			const div = document.createElement('div');
 			if(i%2 != 0){
-				div.className = "recbar";
+				div.className = "recbar mx-auto my-2";
 			}
 			else{
 				div.className = "circle";
@@ -142,5 +148,23 @@ function DrawTable(){
 			document.getElementById("mdiv").appendChild(div);
 		}
 	}
-	if(wasRunning){Play()};
+	if(wasRunning){Play();}
+}
+
+// Add beat
+function AddBeat(){
+	if(running) { Stop(); }
+	if(b<10){
+		b++;
+	}
+	DrawTable();
+}
+
+// Remove beat
+function RemoveBeat(){
+	if(running) { Stop(); }
+	if(b>1){
+		b--;
+	}
+	DrawTable();
 }

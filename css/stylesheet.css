@@ -1,21 +1,18 @@
 html {
-   margin: 0px;
-   height: 100%;
-   width: 100%;
-   min-width: 570px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	min-width: 360px;
 }
 
 body {
+	width: 360px;
   /*background-color: black;*/
 	/*background: rgb(0,0,0);*/
 	background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 100%), url("bg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: white;
-}
-
-.jumbotron{
-	font-family: riesling;
 }
 
 .recbar {
@@ -46,15 +43,14 @@ body {
 	border-radius: 10px 10px 10px 10px;
 	-webkit-box-shadow: 1.5px 1.5px 10px 0.5px #FFFFFF;
 	box-shadow: 1.5px 1.5px 10px 0.5px #FFFFFF;
-	margin-left: auto;
-	margin-right: auto;
-	width: 60%;
-	padding: 25px;
 	max-width: 750px;
-	background-color: black;
-	display: flex;
+	background: black;
 	justify-content: center;
-	align-items: center;
+}
+
+#hdr{
+	font-family: riesling;
+	margin-bottom: 0px;
 }
 
 @font-face
