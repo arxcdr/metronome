@@ -40,7 +40,11 @@ function Tick(){
 	if(subEnabled){
 		mainBeats = GetMainBeats();
 			if(mainBeats.includes(beatIndex)){
-				PlaySound("1b.wav");
+				if(checkStressedFirst() && beatIndex==1){
+					PlaySound("1c.wav");
+				}else{
+					PlaySound("1b.wav");
+				}
 				BlinkAtIndex("m"+mIndex, "red");
 				sIndex = 1;
 				beatIndex++;
@@ -56,7 +60,11 @@ function Tick(){
 			}
 	}	
 	else{
-		PlaySound("1b.wav");
+		if(checkStressedFirst() && beatIndex==1){
+			PlaySound("1c.wav");
+		}else{
+			PlaySound("1b.wav");
+		}
 		BlinkAtIndex("m"+beatIndex, "red");
 		beatIndex++;
 		if(beatIndex > b){resetFlag = true;}
@@ -112,6 +120,12 @@ function GetSubdivisions(){
 function ResetIndexes(){
 	beatIndex = 1;
 	mIndex = 1;
+}
+
+// Check if the first tick should be stressed
+function checkStressedFirst() {
+  var sFirst = document.getElementById("stressFirst");
+  return sFirst.checked;
 }
 
 // Blink at current index to show position
