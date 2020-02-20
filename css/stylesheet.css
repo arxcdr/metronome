@@ -73,6 +73,10 @@ body {
 	margin-bottom: 0px;
 }
 
+#pLink{
+	text-align: center;
+}
+
 @font-face
 {
 font-family: "riesling";
