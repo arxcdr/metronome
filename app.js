@@ -7,6 +7,15 @@ const port = process.env.PORT
 //local port
 //const port = 3000
 
+// attempting to fix undected script
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
+
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.get("/", function(req, res){
 	res.render("index.ejs");
 });
