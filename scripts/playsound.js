@@ -8,6 +8,9 @@ var mIndex = 1; // Position for the main beat
 var sIndex = 1; // Position for subdivisions
 var mainBeats; // Beats per measure
 var sdiv; // Number of div elements to create in the UI
+var sound1a = new Audio("1a.wav"); // loading each sound file to avoid lag on metronome start
+var sound1b = new Audio("1b.wav");
+var sound1c = new Audio("1c.wav");
 var subEnabled = false;
 var subdivisions; // Number of subdivisions requested by user
 var resetFlag = false; // bool to flag the end of the measure has been reached

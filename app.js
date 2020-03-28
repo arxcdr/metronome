@@ -18,5 +18,7 @@ app.use(express.static('fonts'));
 app.use(express.static('sound'));
 
 app.listen(process.env.PORT, process.env.IP, function(){
+	//local
+	//app.listen(port, function(){
 	console.log("Server has started!");
 });
