@@ -19,7 +19,7 @@
   "homepage": "https://github.com/arxcdr/metronome#readme",
   "dependencies": {
     "ejs": "^2.7.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "heroku": "^7.38.2"
   }
 }
